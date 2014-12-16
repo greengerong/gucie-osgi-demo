@@ -1,4 +1,4 @@
 .idea
 *.iml
 target
-apache-karaf-4.0.0.M1/data/log
+apache-karaf-4.0.0.M1/data/
