@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-bundle-plugin.version>2.4.0</maven-bundle-plugin.version>
         <osgi.core.version>5.0.0</osgi.core.version>
-        <guice.version>4.0-beta5</guice.version>
+        <guice.version>3.0</guice.version>
         <slf4j.version>1.7.7</slf4j.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.10.8</mockito.version>
@@ -91,21 +91,21 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>karaf-maven-plugin</artifactId>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.karaf.tooling</groupId>-->
+                <!--<artifactId>karaf-maven-plugin</artifactId>-->
+            <!--</plugin>-->
 
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.karaf.tooling</groupId>
-                    <artifactId>karaf-maven-plugin</artifactId>
-                    <version>3.0.2</version>
-                    <extensions>true</extensions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <!--<pluginManagement>-->
+            <!--<plugins>-->
+                <!--<plugin>-->
+                    <!--<groupId>org.apache.karaf.tooling</groupId>-->
+                    <!--<artifactId>karaf-maven-plugin</artifactId>-->
+                    <!--<version>3.0.2</version>-->
+                    <!--<extensions>true</extensions>-->
+                <!--</plugin>-->
+            <!--</plugins>-->
+        <!--</pluginManagement>-->
     </build>
 </project>
