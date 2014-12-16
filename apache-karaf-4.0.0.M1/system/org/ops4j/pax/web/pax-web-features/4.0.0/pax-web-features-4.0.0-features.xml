@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="org.ops4j.pax.web-4.0.0" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<feature name="pax-jetty" description="Provide Jetty engine support" version="9.0.7.v20131107" resolver="(obr)">
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.activation-api-1.1/1.9.0</bundle>
+        <bundle dependency="false" start-level="30">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:javax.mail/mail/1.4.4</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-annotation_1.1_spec/1.0.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-jaspic_1.0_spec/1.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.ow2.asm/asm-all/5.0.2</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/jetty-annotations/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-continuation/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-http/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-io/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jaspi/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jmx/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jndi/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-plus/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-rewrite/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-security/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-server/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-servlet/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-servlets/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-util/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-util-ajax/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-webapp/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-jaas/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty/jetty-xml/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-server/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-servlet/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-common/9.0.7.v20131107</bundle>
+        <bundle start-level="30">mvn:org.eclipse.jetty.websocket/websocket-api/9.0.7.v20131107</bundle>
+    </feature>
+
+	<feature name="pax-http" version="4.0.0" resolver="(obr)" description="Implementation of the OSGI HTTP Service">
+        <details>Allows to publish servlets using pax web and jetty</details>
+        <configfile finalname="/etc/jetty.xml">mvn:org.ops4j.pax.web/pax-web-features/4.0.0/xml/jettyconfig</configfile>
+        <config name="org.ops4j.pax.web">
+            org.osgi.service.http.port=8181
+            javax.servlet.context.tempdir=${karaf.data}/pax-web-jsp
+            org.ops4j.pax.web.config.file=${karaf.base}/etc/jetty.xml
+        </config>
+        <feature version="[7.0,10.0)">pax-jetty</feature>
+
+        <bundle dependency="true" start-level="20">mvn:org.ow2.asm/asm-all/5.0.2</bundle>
+        <bundle dependency="true" start-level="20">mvn:org.apache.xbean/xbean-bundleutils/3.18</bundle>
+        <bundle dependency="true" start-level="20">mvn:org.apache.xbean/xbean-reflect/3.18</bundle>
+        <bundle dependency="true" start-level="20">mvn:org.apache.xbean/xbean-finder/3.18</bundle>
+
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-api/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-spi/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-runtime/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-jetty/4.0.0</bundle>
+    </feature>
+
+    <feature name="pax-http-whiteboard" description="Provide HTTP Whiteboard pattern support" version="4.0.0" resolver="(obr)">
+        <feature version="[4.0,4.1)">pax-http</feature>
+        <bundle dependency="true" start-level="30">wrap:mvn:org.eclipse.jdt.core.compiler/ecj/4.2.2</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-jsp/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/4.0.0</bundle>
+    </feature>
+
+    <feature name="pax-war" description="Provide support of a full WebContainer" version="4.0.0" resolver="(obr)">
+        <config name="org.ops4j.pax.url.war">
+            org.ops4j.pax.url.war.importPaxLoggingPackages=true
+        </config>
+        <feature version="[4.0,4.1)">pax-http-whiteboard</feature>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-jsp/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-extender-war/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-deployer/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.url/pax-url-war/2.1.0/jar/uber</bundle>
+    </feature>
+
+    <feature name="pax-war-tomcat" description="Provide support of a full WebContainer" version="4.0.0" resolver="(obr)">
+        <config name="org.ops4j.pax.url.war">
+            org.ops4j.pax.url.war.importPaxLoggingPackages=true
+        </config>
+        <config name="org.ops4j.pax.web">
+            org.osgi.service.http.port=8181
+            javax.servlet.context.tempdir=${karaf.data}/pax-web-jsp
+        </config>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.ext.tomcat/catalina/7.0.27.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.ext.tomcat/shared/7.0.27.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.ext.tomcat/util/7.0.27.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-servlet_3.0_spec/1.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-atinject_1.0_spec/1.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jsr303-api-1.0.0/1.8.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jsr305/1.3.9_1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.activation-api-1.1/1.9.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.java-persistence-api-2.0/2.2.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.javamail-api-1.4/2.2.0</bundle>
+
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-stax-api_1.2_spec/1.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-ejb_3.1_spec/1.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-osgi-registry/1.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-jaxws_2.2_spec/1.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-jaxrpc_1.1_spec/2.1</bundle>
+
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.saaj-api-1.3/2.0.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxb-api-2.2/1.8.0</bundle>
+
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-jaspic_1.0_spec/1.1</bundle>
+
+        <bundle dependency="true" start-level="30">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxp-api-1.3/2.2.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.apache.geronimo.specs/geronimo-annotation_1.1_spec/1.0.1</bundle>
+
+        <bundle dependency="true" start-level="20">mvn:org.ow2.asm/asm-all/5.0.2</bundle>
+        <bundle dependency="true" start-level="20">mvn:org.apache.xbean/xbean-bundleutils/3.18</bundle>
+        <bundle dependency="true" start-level="20">mvn:org.apache.xbean/xbean-reflect/3.18</bundle>
+        <bundle dependency="true" start-level="20">mvn:org.apache.xbean/xbean-finder/3.18</bundle>
+
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-api/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-spi/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-runtime/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-tomcat/4.0.0</bundle>
+        <bundle dependency="true" start-level="30">mvn:org.eclipse.jdt.core.compiler/ecj/4.2.2</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-jsp/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-jsp/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-extender-war/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-extender-whiteboard/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.web/pax-web-deployer/4.0.0</bundle>
+        <bundle start-level="30">mvn:org.ops4j.pax.url/pax-url-war/2.1.0/jar/uber</bundle>
+    </feature>
+
+</features>
